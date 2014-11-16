@@ -15,10 +15,12 @@ void max_func(double(*func)(double), double a, double b, double eps, double s, d
 		max_x = b;
 	}
 
+	omp_set_nested(1);
 	#pragma omp parallel shared(max_val, max_x)
 	{
 		#pragma omp single 
 		{
+			printf("Running on %d threads.\n", omp_get_num_threads());
 			eval_interval(func, a, b, fa, fb, eps, s, max_x, max_val);
 		}
 	}

@@ -19,11 +19,9 @@ int main(int argc, char* argv[]) {
 		num_thread = atoi(argv[5]);
 	}
 
-	// omp environment settings
-	//omp_set_nested(1);
-	//omp_set_num_threads(num_thread);
-	printf("Running on %d threads\n", omp_get_num_threads());
-
+	if (num_thread > 0)
+		omp_set_num_threads(num_thread);
+	
 	double max_x, max_val; // variables to store the max values
 	max_func(f, a, b, eps, s, max_x, max_val);
 	printf("max_val = %.3f, x = %.3f\n", max_val, max_x);
